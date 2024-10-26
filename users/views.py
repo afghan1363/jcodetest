@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework.generics import CreateAPIView
+from .serializers import UserSerializer
 
 class CreateUserAPIView(CreateAPIView):
-    pass
+    serializer_class = UserSerializer

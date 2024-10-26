@@ -1,10 +1,12 @@
 from django.urls import path
 from . import views
 
+app_name = 'wallet'
+
 
 urlpatterns = [
-    path('wallets/<WALLET_UUID:wallet_uuid>/operation/', view=views.UpdateAPIView.as_view(),
+    path('wallets/<uuid:uuid>/operation/', view=views.UpdateAPIView.as_view(),
          name='transaction'),
-    path('wallets/<WALLET_UUID:wallet_uuid>/', view=views.RetrieveAPIView.as_view()),
-    path('wallets/all/')
+    path('wallets/<uuid:uuid>/', view=views.RetrieveAPIView.as_view(), name='wallet_detail'),
+    path('wallets/all/', view=views.WalletListAPIView.as_view(), name='wallet_list')
 ]
