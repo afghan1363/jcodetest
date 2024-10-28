@@ -16,7 +16,7 @@ class WalletListAPIView(ListAPIView):
 class WalletRetrieveAPIView(RetrieveAPIView):
     queryset = Wallet.objects.all()
     serializer_class = serializers.GetBalanceSerializer
-    permission_classes = (IsOwner,)
+    # permission_classes = (IsOwner,)
 
     def get_object(self, *args, **kwargs):
         uuid = self.kwargs.get('uuid')
@@ -27,7 +27,7 @@ class WalletRetrieveAPIView(RetrieveAPIView):
 class WalletUpdateAPIView(UpdateAPIView):
     queryset = Wallet.objects.all()
     serializer_class = serializers.WalletTransSerializer
-    permission_classes = (IsOwner,)
+    # permission_classes = (IsOwner,)
 
     def get_object(self, *args, **kwargs):
         uuid = self.kwargs.get('uuid')
