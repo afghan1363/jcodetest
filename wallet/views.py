@@ -6,10 +6,11 @@ from .models import Wallet
 from .permissions import IsOwner
 
 class WalletListAPIView(ListAPIView):
+    queryset = Wallet.objects.all()
     serializer_class = serializers.GetBalanceSerializer
 
-    def get_queryset(self):
-        return Wallet.objects.filter(owner=self.request.user.pk)
+    # def get_queryset(self):
+    #     return Wallet.objects.filter(owner=self.request.user.pk)
     
 
 class WalletRetrieveAPIView(RetrieveAPIView):
@@ -18,7 +19,7 @@ class WalletRetrieveAPIView(RetrieveAPIView):
     permission_classes = (IsOwner,)
 
     def get_object(self, *args, **kwargs):
-        uuid = self.kwargs.get('WALLET_UUID')
+        uuid = self.kwargs.get('uuid')
         obj = get_object_or_404(self.queryset, wallet_uuid=uuid)
         return obj
     
@@ -29,6 +30,6 @@ class WalletUpdateAPIView(UpdateAPIView):
     permission_classes = (IsOwner,)
 
     def get_object(self, *args, **kwargs):
-        uuid = self.kwargs.get('WALLET_UUID')
+        uuid = self.kwargs.get('uuid')
         obj = get_object_or_404(self.queryset, wallet_uuid=uuid)
         return obj

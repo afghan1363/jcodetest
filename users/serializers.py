@@ -1,14 +1,15 @@
 from rest_framework.serializers import ModelSerializer, IntegerField, CharField
 from .models import User
 from wallet.models import Wallet
+from wallet.serializers import NewWalletSerializer
 
 
 class UserSerializer(ModelSerializer):
     """
     Сериализатор модели User
     """
-    id = IntegerField(read_only=True)
     password = CharField(min_length=8, write_only=True)
+    wallet = NewWalletSerializer
 
     def create(self, validated_data):
         user = User.objects.create(
@@ -19,11 +20,11 @@ class UserSerializer(ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         wallet = Wallet.objects.create(
-            owner = user.id
+            owner=user
         )
         wallet.save()
         return user
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('email', 'full_name', 'phone')

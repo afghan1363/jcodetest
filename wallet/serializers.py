@@ -30,3 +30,9 @@ class GetBalanceSerializer(ModelSerializer):
     class Meta:
         model = Wallet
         fields = '__all__'
+
+
+class NewWalletSerializer(ModelSerializer):
+    class Meta:
+        model = Wallet
+        fields = ('owner',)
